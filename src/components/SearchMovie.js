@@ -1,8 +1,9 @@
 import React from "react" ; 
+import "../App.css" ;
 
 export default function SearchMovie ( props ) {
     const [ search, setSearch ] = React.useState("") ;
-    const [movies, setMovies] = React.useState([{
+    const [ movies, setMovies ] = React.useState([{
         "Title": "Star Wars: Episode IV - A New Hope",
         "Year": "1977",
         "imdbID": "tt0076759",
@@ -18,21 +19,27 @@ export default function SearchMovie ( props ) {
             'https://m.media-amazon.com/images/M/MV5BOWZlMjFiYzgtMTUzNC00Y2IzLTk1NTMtZmNhMTczNTk0ODk1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg',
     }]);
 
-    const getMovieInfo = async()=> {
-        const response = await fetch("http://www.omdbapi.com/?s=pokemon&apikey=d4c62730") ;
+    const getMovieInfo = async( query )=> {
+        
+        const response = await fetch(`http://www.omdbapi.com/?s=${query}&apikey=d4c62730`) ;
         const responseJson = await response.json() ;
         console.log(responseJson) ;
-        setMovies( responseJson.Search ) ;
+        if( responseJson.Response === "True" ){
+            setMovies(responseJson.Search) ;
         }
-    
-    const handleSearch = (e) => {
-        setSearch(e.target.value) ;
-    } 
+        else{
+            setMovies( movies ) ;
+        }
+        }
+     React.useEffect(()=>{
+         const data = setTimeout( ()=> getMovieInfo( search ) , 500) ;
+         return () => clearTimeout(data);
+     } , [search])
     
     return (
         <div>
-            <input type="text" placeholder="Search your First movie" value={search} onChange={handleSearch}/>
-                {movies.map( item => <div>{item.Title}<img alt={ item.Title } src={item.Poster} /></div>)}
+            <input type="text" placeholder="Search your First movie" value={search} onChange={ event => setSearch(event.target.value)}/>
+               <div className="recommendation-container"> {movies.map( item => <div><h3>{item.Title}</h3><img alt={ item.Title } src={item.Poster} /></div>)}</div>
         </div>
     )
 }
