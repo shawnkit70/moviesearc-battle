@@ -1,13 +1,19 @@
 import React from "react";
 
-const URL = "http://www.omdbapi.com/?i=tt3896198&apikey=d4c62730" ;
+import 'bootstrap/dist/css/bootstrap.min.css' ;
+import './App.css' ;
+import SearchMovie from "./components/SearchMovie";
 
-function App() {
-  return (
-    <div className="App">
-     {URL}
-    </div>
-  );
+const URL = "http://www.omdbapi.com/?s=pokemon&apikey=d4c62730" ;
+
+export default function App() {
+  
+	return (
+		<div className='container-fluid movie-app'>
+			<div className='row'>
+				<SearchMovie url = {URL} />
+			</div>
+		</div>
+	);
 }
 
-export default App;
