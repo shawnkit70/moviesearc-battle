@@ -1,5 +1,10 @@
 
-.recommendation-container > img{
-    height: 5px;
-    width: 5px;
+img{
+    height: 2em;
+    width: 2em;
+}
+
+.movieList{
+    display: flex;
+    flex-direction: row;
 }

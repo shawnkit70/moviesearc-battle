@@ -1,5 +1,6 @@
 import React from "react" ; 
 import "../App.css" ;
+import Dropdown from 'react-bootstrap/Dropdown'
 
 export default function SearchMovie ( props ) {
     const [ search, setSearch ] = React.useState("") ;
@@ -38,8 +39,14 @@ export default function SearchMovie ( props ) {
     
     return (
         <div>
-            <input type="text" placeholder="Search your First movie" value={search} onChange={ event => setSearch(event.target.value)}/>
-               <div className="recommendation-container"> {movies.map( item => <div><h3>{item.Title}</h3><img alt={ item.Title } src={item.Poster} /></div>)}</div>
+            <input type="text" placeholder="Search your First movie" 
+            value={search} onChange={ event => setSearch(event.target.value)}/>
+            <div className="movieList">
+            <Dropdown.Menu show> {movies
+            .map( item => <Dropdown.Item eventKey={item.imdbID} onClick={ event => console.log(event) }>
+            <img alt={ item.Title } src={item.Poster} />
+            <h3>{item.Title}</h3></Dropdown.Item>)}</Dropdown.Menu>
+            </div>
         </div>
     )
 }
