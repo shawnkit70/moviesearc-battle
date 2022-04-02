@@ -32,8 +32,8 @@ export default function SearchMovie ( props ) {
             const response = await fetch(`http://www.omdbapi.com/?i=${id}&apikey=d4c62730`)
             const selectedMovie = await response.json() ;
             console.log( selectedMovie ); 
-            const {Title,Year,Rated,Awards,BoxOffice,imdbRating,imdbVotes} = selectedMovie ;
-            setMovie( prevValue => ({...prevValue , Title , Year , Rated , Awards , BoxOffice , imdbRating , imdbVotes } ) ) ;
+            const {Title,Year,Rated,Awards,BoxOffice,imdbRating,imdbVotes,Poster} = selectedMovie ;
+            setMovie( prevValue => ({...prevValue , Title , Year , Rated , Awards , BoxOffice , imdbRating , imdbVotes , Poster } ) ) ;
             console.log(movie) ;
         }
     
@@ -65,7 +65,8 @@ export default function SearchMovie ( props ) {
             </div>
             <div>
         {Object.entries(movie).map(([key, value]) =>
-            <p>{key} : {value}</p>
+            {if( key === "Poster") return <img alt="Movie" src={value} />
+            else return<p>{key} : {value}</p>}
         )}
     </div>
         </div>
