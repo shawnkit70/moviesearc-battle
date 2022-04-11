@@ -1,3 +1,11 @@
+Movie battle website where user can search for two different movies simultaneously,
+Compare their rating,box office collection, description and decide what movie they can watch next
+Made with reactjs,bootstrap used for styling,fetched movie data from IMDb and much more.
+(Work in progress for styling part)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
